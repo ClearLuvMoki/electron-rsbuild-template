@@ -1,19 +1,28 @@
 {
-    "name": "electron-rsbuild-template",
-    "version": "2.0.0",
-    "type": "module",
-    "bin": {
-        "electron-rsbuild-template": "index.js"
-    },
-    "author": "Moki <2893096286@qq.com> (https://moonquakes.online)",
-    "files": [
-        "index.js",
-        ".gitignore",
-        "template"
-    ],
-    "devDependencies": {
-        "inquirer": "^12.9.6",
-        "dotenv": "^17.2.3",
-        "ora": "^9.0.0"
-    }
+  "name": "electron-rsbuild-template",
+  "version": "2.3.0",
+  "type": "module",
+  "bin": {
+    "electron-rsbuild-template": "index.js"
+  },
+  "scripts": {
+    "dev": "cd ./template && npm run dev"
+  },
+  "description": "The fastest and most up-to-date tool for building Electron apps width rsbuild",
+  "homepage": "https://github.com/ClearLuvMoki/electron-rsbuild-template",
+  "author": "Moki <2893096286@qq.com> (https://moonquakes.online)",
+  "files": [
+    "index.js",
+    ".gitignore",
+    "README.md",
+    "template",
+    "package.json"
+  ],
+  "dependencies": {
+    "inquirer": "^12.9.6",
+    "ora": "^9.0.0"
+  },
+  "devDependencies": {
+    "rslog": "^1.3.0"
+  }
 }
