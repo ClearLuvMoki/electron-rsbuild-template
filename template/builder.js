@@ -1,12 +1,14 @@
-const {version} = require('./package.json')
+const {version, name} = require('./package.json')
 const dayjs = require("dayjs");
 const {resolve} = require("node:path")
+require('dotenv').config({
+    path: ["./env/.env", "./env/.env.local"]
+})
 
 const dir = process.env?.ENV_FILE + "/" + dayjs().format("YYYY_MM_DD_HH_mm_ss");
 const versionArr = version.split('-')
 const bundleShortVersion = versionArr[0]
 const bundleVersion = versionArr[1]
-const productName = "your-product-name"
 
 /**
  * @type {import('electron-builder').Configuration}
@@ -14,8 +16,8 @@ const productName = "your-product-name"
  */
 const config = {
     asar: true,
-    productName: productName,
-    appId: 'cn.product.name.desktop',
+    productName: process.env?._PRODUCT_NAME ?? name,
+    appId: process.env?._APP_ID,
     directories: {
         output: `./release/app/${dir}`,
     },
@@ -43,15 +45,11 @@ const config = {
         bundleVersion: bundleVersion,
         bundleShortVersion: bundleShortVersion,
         artifactName: '${productName}-${version}-${arch}.${ext}',
-        identity: null,
-        // identity: "your identity name",
+        identity: process.env?._APPLE_IDENTITY,
         extendInfo: {
-            ElectronTeamID: 'ElectronTeamID',
+            ElectronTeamID: process.env?._APPLE_TEAM_ID,
             ITSAppUsesNonExemptEncryption: 'NO'
-        },
-        asarUnpack: [
-            '**/*.node',
-        ],
+        }
     },
     // MAC Store
     mas: {
@@ -114,16 +112,6 @@ const config = {
             __dirname,
             `./public/assets/icons/icon.icns`,
         ),
-        mimeTypes: ["application/pdf"],
-        desktop: {
-        entry: {
-            Name: "玻尔",
-            Comment: "Bohrium PDF Reader",
-            MimeType: "application/pdf;",
-            Categories: "Office;",
-            StartupWMClass: "玻尔",
-        },
-        },
     },
 }
 module.exports = config
