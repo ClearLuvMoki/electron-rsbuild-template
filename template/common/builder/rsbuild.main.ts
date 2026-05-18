@@ -3,9 +3,8 @@ import { defineConfig, mergeRsbuildConfig, logger } from "@rsbuild/core";
 import { releaseMainPath, srcMainPath } from "./paths";
 import CommonConfig from "./rsbuild.common";
 
-
 logger.info(
-  `Slef Environment`,
+  `Environment`,
   Object.fromEntries(Object.entries(process.env || {}).filter(([key]) => key.startsWith("_"))),
 );
 
@@ -22,6 +21,7 @@ const Config = defineConfig({
     },
   },
   output: {
+    module: false,
     target: "node",
     distPath: {
       root: join(releaseMainPath),
@@ -33,5 +33,4 @@ const Config = defineConfig({
     },
   },
 });
-
-module.exports = mergeRsbuildConfig(CommonConfig, Config);
+export default mergeRsbuildConfig(CommonConfig, Config);

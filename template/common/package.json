@@ -1,0 +1,37 @@
+{
+    "name": "electron-rsbuild-template",
+    "version": "1.0.0",
+    "main": "./release/dist/main/index.js",
+    "scripts": {
+      "dev": "cross-env NODE_ENV=development plop",
+      "dev:render": "rsbuild dev --config ./builder/rsbuild.render.ts",
+      "dev:main": "nodemon",
+      "build": "cross-env NODE_ENV=production plop",
+      "rebuild:main": "npm run build:main && electron ./release/dist/main/index.js",
+      "build:main": "rsbuild build --config ./builder/rsbuild.main.ts",
+      "build:render": "rsbuild build --config ./builder/rsbuild.render.ts",
+      "postinstall": "electron-builder install-app-deps",
+      "icon": "electron-icon-builder -i=./public/assets/icons/icon.png -o=./public/assets/icons -f",
+      "lint": "pnpm biome check --write ./src"
+    },
+    "lint-staged": {
+      "./src/**/*.{ts,tsx,js,json,html,yml,css,less,scss,md}": [
+        "pnpm run lint"
+      ]
+    },
+    "devDependencies": {
+      "@biomejs/biome": "latest",
+      "@rsbuild/core": "latest",
+      "@types/node": "latest",
+      "cross-env": "latest",
+      "dotenv": "latest",
+      "electron": "latest",
+      "electron-builder": "latest",
+      "electron-icon-builder": "latest",
+      "lint-staged": "latest",
+      "nodemon": "latest",
+      "plop": "latest",
+      "rslog": "latest"
+    }
+  }
+  

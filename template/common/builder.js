@@ -1,11 +1,24 @@
 const {version, name} = require('./package.json')
-const dayjs = require("dayjs");
 const {resolve} = require("node:path")
+
 require('dotenv').config({
     path: ["./env/.env", "./env/.env.local"]
 })
 
-const dir = process.env?.ENV_FILE + "/" + dayjs().format("YYYY_MM_DD_HH_mm_ss");
+const formatDateTime = (date) => {
+    const pad = (value) => String(value).padStart(2, "0");
+
+    return [
+        date.getFullYear(),
+        pad(date.getMonth() + 1),
+        pad(date.getDate()),
+        pad(date.getHours()),
+        pad(date.getMinutes()),
+        pad(date.getSeconds()),
+    ].join("_");
+};
+
+const dir = process.env?.ENV_FILE + "/" + formatDateTime(new Date());
 const versionArr = version.split('-')
 const bundleShortVersion = versionArr[0]
 const bundleVersion = versionArr[1]
@@ -104,7 +117,7 @@ const config = {
         deleteAppDataOnUninstall: false,
         createDesktopShortcut: true,
         createStartMenuShortcut: true,
-        shortcutName: productName,
+        shortcutName: process.env?._PRODUCT_NAME ?? name,
     },
     linux: {
         target: ["AppImage", "deb"],

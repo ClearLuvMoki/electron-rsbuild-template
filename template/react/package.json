@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@rsbuild/plugin-babel": "latest",
+    "@rsbuild/plugin-react": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "babel-plugin-react-compiler": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  }
+}
